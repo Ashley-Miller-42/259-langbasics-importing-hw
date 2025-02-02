@@ -19,6 +19,9 @@
 
 # ANSWER
 
+library(readr)
+library(dplyr)
+
 
 ### QUESTION 2 ----- 
 
@@ -44,7 +47,16 @@
 
 col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
-# ANSWER
+# ANSWER:
+
+fname <- "data_A/6191_1.txt"
+colname <- c("trial_num","speed_actual","speed_response","correct")
+coltypes<- "dccl"
+
+ds1 <- read_delim('data_A/6191_1.txt', col_names = colname, skip = 7, col_types = coltypes)
+print(ds1)
+
+#I am a dummy that was using read.delim for 30 mins :/
 
 
 
@@ -56,6 +68,12 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+ds1$trial_nub <- "100"
+
+print(ds1)
+
+write_csv(ds1, file = "data_cleaned/combined.csv")
+
 
 ### QUESTION 4 ----- 
 
@@ -64,12 +82,16 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+full_files<- list.files('data_A', full.names = TRUE) 
+
 
 ### QUESTION 5 ----- 
 
 # Read all of the files in data_A into a single tibble called ds
 
 # ANSWER
+
+ds<- read_delim(full_files, delim = '')
 
 
 ### QUESTION 6 -----
@@ -84,6 +106,13 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+ds2$trial_nub <- "100"
+
+coltypes2<- "iccl"
+
+ds2 <- read_delim('data_A/6191_1.txt', col_names = colname, skip = 7, col_types = coltypes2)
+print(ds2)
+
 
 ### QUESTION 7 -----
 
@@ -94,6 +123,10 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+print(ds2)
+?read_tsv
+
+
 
 ### QUESTION 8 -----
 
@@ -102,4 +135,16 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 # There are two sheets of data -- import each one into a new tibble
 
 # ANSWER
+
+install.packages("readxl")
+library(readxl)
+
+read_excel('data_B/participant_info.xlsx')
+
+x1<- read_excel('data_B/participant_info.xlsx', sheet = 1)
+print(x1)
+
+x2<- read_excel('data_B/participant_info.xlsx', sheet = 2)
+print(x2)
+
 
